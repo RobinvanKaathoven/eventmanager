@@ -29,6 +29,14 @@
         <g:select name="participantSelect" from="${participantInstanceList}" optionKey="id" />
     </div>
 
+    <div>
+        <select name="participantSelectAlt" id="participantSelectAlt">
+            <g:each in="${participantInstanceList}" var="participantInstance">
+                <option value="${participantInstance.id}">${participantInstance}</option>
+            </g:each>
+        </select>
+    </div>
+    
     <table>
         <thead>
         <tr>
