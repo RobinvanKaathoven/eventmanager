@@ -1,6 +1,9 @@
 import net.luminis.university.eventmanager.Entry
 import net.luminis.university.eventmanager.Event
 import net.luminis.university.eventmanager.Participant
+import net.luminis.university.eventmanager.Role
+import net.luminis.university.eventmanager.User
+import net.luminis.university.eventmanager.UserRole
 
 class BootStrap {
 
@@ -19,6 +22,10 @@ class BootStrap {
         def robinGrails101Entry = new Entry(participant: robin, event: grails101).save()
         def robinGrails102Entry = new Entry(participant: robin, event: grails102).save()
         def frankGrails101Entry = new Entry(participant: frank, event: grails101).save()
+
+        def adminUser = new User(username: "admin", password: "admin").save()
+        def adminRole = new Role(authority: "ROLE_ADMIN").save()
+        UserRole.create adminUser, adminRole, true
 
     }
     def destroy = {
