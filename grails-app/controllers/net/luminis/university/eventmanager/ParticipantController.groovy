@@ -3,6 +3,9 @@ package net.luminis.university.eventmanager
 import org.springframework.dao.DataIntegrityViolationException
 import grails.converters.JSON
 
+import grails.plugin.springsecurity.annotation.Secured
+
+@Secured(["hasRole('ROLE_ADMIN')"])
 class ParticipantController {
 
     def jsonMarshallingService
