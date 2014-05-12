@@ -24,6 +24,11 @@
     <g:if test="${flash.message}">
         <div class="message" role="status">${flash.message}</div>
     </g:if>
+
+    <div>
+        <g:select name="participantSelect" from="${participantInstanceList}" optionKey="id" />
+    </div>
+
     <table>
         <thead>
         <tr>
