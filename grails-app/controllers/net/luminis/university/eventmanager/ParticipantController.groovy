@@ -5,6 +5,8 @@ import grails.converters.JSON
 
 class ParticipantController {
 
+    def jsonMarshallingService
+
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
     def index() {
@@ -22,7 +24,7 @@ class ParticipantController {
             return
         }
 
-        [participantInstanceList: participantInstanceList, participantInstanceTotal: participantInstanceTotal]
+        [participantInstanceList: participantInstanceList, participantInstanceTotal: participantInstanceTotal, participantInstanceListJson: participantInstanceList.collect(  ) { jsonMarshallingService.marshall(it) }]
     }
 
     def create() {
@@ -68,7 +70,7 @@ class ParticipantController {
             return
         }
 
-        [participantInstance: participantInstance, foundByAttributesLabel : foundByAttributesLabel]
+        [participantInstance: participantInstance, foundByAttributesLabel : foundByAttributesLabel, participantJson : jsonMarshallingService.marshall(participantInstance)]
     }
 
     def edit(Long id) {
