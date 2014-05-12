@@ -44,9 +44,18 @@ class ParticipantController {
         def participantInstance
         def foundByAttributesLabel
 
-        participantInstance = Participant.get(id)
-        foundByAttributesLabel = "id"
-
+        if(id && params.firstName && params.lastName) {
+            participantInstance = Participant.findByIdAndFirstNameAndLastName(id, params.firstName, params.lastName);
+            foundByAttributesLabel = "id, first name and last name"
+        }
+        else if(!id && params.firstName && params.lastName) {
+            participantInstance = Participant.findByFirstNameAndLastName(params.firstName, params.lastName);
+            foundByAttributesLabel = "first name and last name"
+        }
+        else {
+            participantInstance = Participant.get(id)
+            foundByAttributesLabel = "id"
+        }
 
         if (!participantInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'participant.label', default: 'Participant'), id])
