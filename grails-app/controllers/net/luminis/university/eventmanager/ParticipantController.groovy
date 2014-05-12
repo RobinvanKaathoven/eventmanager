@@ -41,7 +41,13 @@ class ParticipantController {
     }
 
     def show(Long id) {
-        def participantInstance = Participant.get(id)
+        def participantInstance
+        def foundByAttributesLabel
+
+        participantInstance = Participant.get(id)
+        foundByAttributesLabel = "id"
+
+
         if (!participantInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'participant.label', default: 'Participant'), id])
             redirect(action: "list")
@@ -53,7 +59,7 @@ class ParticipantController {
             return
         }
 
-        [participantInstance: participantInstance]
+        [participantInstance: participantInstance, foundByAttributesLabel : foundByAttributesLabel]
     }
 
     def edit(Long id) {
